@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
+@CrossOrigin
 public class TaskController {
   private List<Task> tasks = new ArrayList<>();
   private Long newId = 0L;
@@ -27,6 +28,7 @@ public class TaskController {
 
   @PostMapping
   public Task create(@RequestBody Task task) {
+    System.out.println("POST tasks");
     task.setId(generateId());
     tasks.add(task);
 
