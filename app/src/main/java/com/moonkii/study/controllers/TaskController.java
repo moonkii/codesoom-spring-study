@@ -7,36 +7,51 @@
 
 package com.moonkii.study.controllers;
 
+import com.moonkii.study.application.TaskService;
 import com.moonkii.study.models.Task;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
 @CrossOrigin
 public class TaskController {
-  private List<Task> tasks = new ArrayList<>();
-  private Long newId = 0L;
+  private TaskService taskService;
+
+  public TaskController() {
+    taskService = new TaskService();
+  }
 
   @GetMapping
   public List<Task> list() {
-    System.out.println("GET tasks");
-    return tasks;
+    return taskService.getTasks();
+  }
+
+  @GetMapping("{id}")
+  public Task detail(@PathVariable Long id) {
+    return taskService.getTask(id);
+  }
+
+  @PutMapping("{id}")
+  public Task update(@PathVariable Long id, @RequestBody Task source) {
+    return taskService.updateTask(id, source);
+  }
+
+  @PatchMapping("{id}")
+  public Task patch(@PathVariable Long id, @RequestBody Task source) {
+    return taskService.updateTask(id, source);
+  }
+
+  @DeleteMapping("{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void delete(@PathVariable Long id) {
+    taskService.deleteTask(id);
   }
 
   @PostMapping
   public Task create(@RequestBody Task task) {
-    System.out.println("POST tasks");
-    task.setId(generateId());
-    tasks.add(task);
-
-    return task;
-  }
-
-  private Long generateId() {
-    newId += 1;
-    return newId;
+    return taskService.createTask(task);
   }
 }
