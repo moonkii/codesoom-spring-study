@@ -9,7 +9,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class TaskServiceTest {
   private static final String TASK_TITLE = "test";
@@ -68,7 +67,7 @@ class TaskServiceTest {
   }
 
   @Test
-  void updateTask() {
+  void updateTaskWithExistedID() {
     Task source = new Task();
     source.setTitle(TASK_TITLE + UPDATE_SUFFIX);
     taskService.updateTask(1L, source);
@@ -78,7 +77,16 @@ class TaskServiceTest {
   }
 
   @Test
-  void deleteTask() {
+  void updateTaskWithNotExistedID() {
+    Task source = new Task();
+    source.setTitle(TASK_TITLE + UPDATE_SUFFIX);
+
+    assertThatThrownBy(() -> taskService.updateTask(100L, source))
+        .isInstanceOf(TaskNotFoundException.class);
+  }
+
+  @Test
+  void deleteTaskWithExistedID() {
     int oldSize = taskService.getTasks().size();
 
     taskService.deleteTask(1L);
@@ -86,5 +94,11 @@ class TaskServiceTest {
     int newSize = taskService.getTasks().size();
 
     assertThat(oldSize - newSize).isEqualTo(1);
+  }
+
+  @Test
+  void deleteTaskWithNotExistedID() {
+    assertThatThrownBy(() -> taskService.deleteTask(100L))
+        .isInstanceOf(TaskNotFoundException.class);
   }
 }

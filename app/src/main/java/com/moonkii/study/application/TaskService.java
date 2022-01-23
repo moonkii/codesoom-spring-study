@@ -2,10 +2,12 @@ package com.moonkii.study.application;
 
 import com.moonkii.study.TaskNotFoundException;
 import com.moonkii.study.models.Task;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class TaskService {
   // 1. list -> getTasks
   // 2. detail -> getTask (with ID)
@@ -44,9 +46,11 @@ public class TaskService {
     return task;
   }
 
-  public void deleteTask(Long id) {
+  public Task deleteTask(Long id) {
     Task task = getTask(id);
     tasks.remove(task);
+
+    return task;
   }
 
   private Long generateId() {

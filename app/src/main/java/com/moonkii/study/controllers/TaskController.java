@@ -20,8 +20,8 @@ import java.util.List;
 public class TaskController {
   private TaskService taskService;
 
-  public TaskController() {
-    taskService = new TaskService();
+  public TaskController(TaskService taskService) {
+    this.taskService = taskService;
   }
 
   @GetMapping
@@ -35,6 +35,7 @@ public class TaskController {
   }
 
   @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
   public Task create(@RequestBody Task task) {
     return taskService.createTask(task);
   }
@@ -50,7 +51,6 @@ public class TaskController {
   }
 
   @DeleteMapping("{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable Long id) {
     taskService.deleteTask(id);
   }
