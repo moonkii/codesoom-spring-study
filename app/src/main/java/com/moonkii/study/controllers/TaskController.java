@@ -34,6 +34,11 @@ public class TaskController {
     return taskService.getTask(id);
   }
 
+  @PostMapping
+  public Task create(@RequestBody Task task) {
+    return taskService.createTask(task);
+  }
+
   @PutMapping("{id}")
   public Task update(@PathVariable Long id, @RequestBody Task source) {
     return taskService.updateTask(id, source);
@@ -48,10 +53,5 @@ public class TaskController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable Long id) {
     taskService.deleteTask(id);
-  }
-
-  @PostMapping
-  public Task create(@RequestBody Task task) {
-    return taskService.createTask(task);
   }
 }
