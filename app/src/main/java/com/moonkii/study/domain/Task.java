@@ -1,6 +1,9 @@
-package com.moonkii.study.models;
+package com.moonkii.study.domain;
 
+// Entity (Domain)
+// DB의 Entity 와 다름에 주의!
 public class Task {
+  // Identifier - Unique Key
   private Long id;
 
   private String title;

@@ -1,7 +1,7 @@
 package com.moonkii.study;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moonkii.study.models.Task;
+import com.moonkii.study.domain.Task;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 

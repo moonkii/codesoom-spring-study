@@ -8,7 +8,7 @@
 package com.moonkii.study.controllers;
 
 import com.moonkii.study.application.TaskService;
-import com.moonkii.study.models.Task;
+import com.moonkii.study.domain.Task;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

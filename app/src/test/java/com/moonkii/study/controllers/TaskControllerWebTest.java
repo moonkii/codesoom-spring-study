@@ -2,7 +2,7 @@ package com.moonkii.study.controllers;
 
 import com.moonkii.study.TaskNotFoundException;
 import com.moonkii.study.application.TaskService;
-import com.moonkii.study.models.Task;
+import com.moonkii.study.domain.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,8 @@
 package com.moonkii.study.application;
 
 import com.moonkii.study.TaskNotFoundException;
-import com.moonkii.study.models.Task;
+import com.moonkii.study.domain.Task;
+import com.moonkii.study.domain.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +19,10 @@ class TaskServiceTest {
 
   @BeforeEach
   void setUp() {
+    TaskRepository taskRepository = new TaskRepository();
+
     // subject(테스트하는 대상)
-    taskService = new TaskService();
+    taskService = new TaskService(taskRepository);
 
     // fixtures
     Task task = new Task();
